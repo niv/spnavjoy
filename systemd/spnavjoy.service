@@ -1,0 +1,16 @@
+[Unit]
+Description=SpaceMouse to virtual joystick bridge
+Documentation=https://github.com/niv/spnavjoy
+StartLimitIntervalSec=0
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStartPre=/usr/bin/test -S /run/spnav.sock
+ExecStart=%h/.local/bin/spnavjoy
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=graphical-session.target
